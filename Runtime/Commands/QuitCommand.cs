@@ -1,6 +1,4 @@
-﻿using UnityEditor;
-
-namespace Tactile.Console.Commands
+﻿namespace Tactile.Console.Commands
 {
     [GlobalCommand]
     public class QuitCommand : BaseCommandWithParameters
@@ -12,7 +10,7 @@ namespace Tactile.Console.Commands
         protected override void Execute(Console console, ParsedArguments arguments)
         {
 #if UNITY_EDITOR
-            EditorApplication.ExitPlaymode();
+            UnityEditor.EditorApplication.ExitPlaymode();
 #else
             Application.Quit();
 #endif
