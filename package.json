@@ -1,0 +1,16 @@
+{
+  "name": "com.figsware.tactile.console",
+  "version": "0.1.0",
+  "displayName": "Tactile Console",
+  "description": "A console system that enables you to define commands and execute them",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  "author": {
+    "name": "Figsware"
+  },
+  "type": "library",
+  "dependencies": {}
+}
