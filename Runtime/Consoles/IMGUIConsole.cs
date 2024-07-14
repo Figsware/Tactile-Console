@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using Tactile.Console.Commands;
 using Tactile.Console.Parameters;
@@ -24,6 +25,12 @@ namespace Tactile.Console.Interfaces
 
         public static Font MonospaceFont => GetMonospaceFont();
         private static Font _monospaceFont;
+        private static readonly string[] MonospaceFontNames =
+        {
+            "JetBrains Mono",
+            "Consolas",
+            "SF Mono"
+        };
         
 
         public IMGUIConsole()
@@ -109,12 +116,12 @@ namespace Tactile.Console.Interfaces
             OnRepaint?.Invoke();
         }
 
-        public static Font GetMonospaceFont()
+        private static Font GetMonospaceFont()
         {
-            if (!_monospaceFont)
-            {
-                _monospaceFont = Font.CreateDynamicFontFromOSFont("Consolas", 12);
-            }
+            if (_monospaceFont) return _monospaceFont;
+            var osFonts = Font.GetOSInstalledFontNames();
+            var fontName = MonospaceFontNames.FirstOrDefault(name => osFonts.Contains(name));
+            _monospaceFont = fontName != null ? Font.CreateDynamicFontFromOSFont(fontName, 12) : null;
 
             return _monospaceFont;
         }

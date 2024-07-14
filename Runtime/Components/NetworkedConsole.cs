@@ -17,6 +17,7 @@ namespace Tactile.Console.Components
         [SerializeField] private int port = 8888;
         [SerializeField] private string prefix = "$ ";
         [SerializeField] private bool runInEditor = true;
+        [SerializeField] private bool runInReleaseBuilds = false;
         private Socket _socket;
         private ConcurrentQueue<(Console console, string command)> _queue;
         private ConcurrentBag<Socket> _clients;
@@ -51,7 +52,12 @@ namespace Tactile.Console.Components
 
         private async void RunSocket()
         {
+            // If we're in edit mode but don't allow running in editor, stop now.
             if (Application.isEditor && !Application.isPlaying && !runInEditor)
+                return;
+
+            // If we're a release build but don't allow running in release builds, stop now.
+            if (!Application.isEditor && !Debug.isDebugBuild && !runInReleaseBuilds)
                 return;
             
             _queue = new ConcurrentQueue<(Console console, string command)>();
