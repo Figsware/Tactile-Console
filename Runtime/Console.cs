@@ -72,7 +72,7 @@ namespace Tactile.Console
 
         public static BaseCommand[] GetGlobalCommands() => GlobalConsoleCommands.Values.OrderBy(c => c.Name).ToArray();
 
-        public void AddConsoleCommand(BaseCommandWithParameters command)
+        public void AddConsoleCommand(BaseCommand command)
         {
             _consoleCommands.Add(command.Name, command);
         }
@@ -82,7 +82,7 @@ namespace Tactile.Console
             _consoleCommands.Remove(name);
         }
         
-        public static void AddGlobalCommand(BaseCommandWithParameters command)
+        public static void AddGlobalCommand(BaseCommand command)
         {
             GlobalConsoleCommands.Add(command.Name, command);
         }
