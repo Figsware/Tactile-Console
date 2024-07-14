@@ -2,7 +2,6 @@
 using System.Text;
 using Tactile.Console.Commands;
 using Tactile.Console.Parameters;
-using UnityEditor;
 using UnityEngine;
 
 namespace Tactile.Console.Interfaces
@@ -13,7 +12,7 @@ namespace Tactile.Console.Interfaces
         public int FontSize = 12;
 
 #if UNITY_EDITOR
-        public bool UseEditorSelectableLabel = false;
+        public bool UseEditorGUI = false;
 #endif
         
         private readonly StringBuilder _buffer = new();
@@ -53,9 +52,11 @@ namespace Tactile.Console.Interfaces
         public void OnGUI()
         {
             GUI.skin.font = GetMonospaceFont();
-            
+
             GUILayout.BeginVertical();
-            _scrollPos = GUILayout.BeginScrollView(_scrollPos);
+            
+            _scrollPos = GUILayout.BeginScrollView(_scrollPos);   
+            
             var consoleTextStyle = new GUIStyle(GUI.skin.label)
             {
                 alignment = TextAnchor.LowerLeft,
@@ -69,18 +70,7 @@ namespace Tactile.Console.Interfaces
                 richText = false
             };
             
-#if UNITY_EDITOR
-            if (UseEditorSelectableLabel)
-            {
-                EditorGUILayout.SelectableLabel(_buffer.ToString(), consoleTextStyle, GUILayout.ExpandHeight(true));    
-            }
-            else
-            {
-                GUILayout.Label(_buffer.ToString(), consoleTextStyle, GUILayout.ExpandHeight(true));
-            }
-#else
             GUILayout.Label(_buffer.ToString(), consoleTextStyle, GUILayout.ExpandHeight(true));
-#endif
             
             GUILayout.EndScrollView();
             

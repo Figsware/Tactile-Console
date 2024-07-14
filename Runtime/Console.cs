@@ -3,28 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Tactile.Console.Commands;
+using Tactile.Console.Printing;
 using UnityEngine;
 
 namespace Tactile.Console
 {
     public class Console
     {
-        public bool EmitUnityLogMessages = true;
+        public bool PrintUnityLogMessages = true;
         public bool UseGlobalCommands = true;
         
-        public PrintBuilder.PrintFormat Format;
+        public PrintFormat Format;
         public event Action<string> OnPrintLine;
         
         private readonly Dictionary<string, BaseCommand> _consoleCommands = new();
         private static readonly Dictionary<string, BaseCommand> GlobalConsoleCommands = new();
         private bool _emitUnityLogMessages;
         private static bool _didLoadGlobalCommands = false;
-        private readonly PrintBuilder _printBuilder;
+        private readonly BasePrintBuilder _printBuilder;
      
         public Console()
         {
-            Format = new PrintBuilder.PrintFormat();
-            _printBuilder = new PrintBuilder(Format);
+            Format = new PrintFormat();
+            _printBuilder = new RichTextPrintBuilder(Format);
+            Application.logMessageReceived += OnUnityLogMessage;
+            LoadGlobalCommands();
+        }
+
+        public Console(BasePrintBuilder printBuilder)
+        {
+            Format = new PrintFormat();
+            _printBuilder = printBuilder;
+            printBuilder.Format = Format;
             Application.logMessageReceived += OnUnityLogMessage;
             LoadGlobalCommands();
         }
@@ -71,16 +81,16 @@ namespace Tactile.Console
             OnPrintLine?.Invoke(message);
         }
         
-        public void Print(Func<PrintBuilder, PrintBuilder> createMessage)
+        public void Print(Func<BasePrintBuilder, BasePrintBuilder> createMessage)
         {
             createMessage(_printBuilder + Format.TextColor);
-            Print(_printBuilder.BuildStringAndClear());
+            Print(_printBuilder.Build());
         }
         
-        public void Print(Func<PrintBuilder, PrintBuilder.PrintFormat, PrintBuilder> createMessage)
+        public void Print(Func<BasePrintBuilder, PrintFormat, BasePrintBuilder> createMessage)
         {
             createMessage(_printBuilder + Format.TextColor, Format);
-            Print(_printBuilder.BuildStringAndClear());
+            Print(_printBuilder.Build());
         }
 
         public void PrintWarning(string message) => Print(pb => pb + Format.WarningColor + message);
@@ -89,6 +99,8 @@ namespace Tactile.Console
 
         private void OnUnityLogMessage(string condition, string stackTrace, LogType type)
         {
+            if (!PrintUnityLogMessages) return;
+            
             switch (type)
             {
                 case LogType.Error:

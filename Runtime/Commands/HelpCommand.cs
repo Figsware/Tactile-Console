@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Tactile.Console.Printing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,10 +15,10 @@ namespace Tactile.Console.Commands
 
         protected override void Execute(Console console, ParsedArguments arguments)
         {
-           PrintCommands(console, console.GetCommands(), string.Empty);
+           PrintHelpForCommands(console, console.GetCommands());
         }
 
-        private static void PrintCommands(Console console, BaseCommand[] commands, string namePrefix)
+        public static void PrintHelpForCommands(Console console, BaseCommand[] commands, string namePrefix = "")
         {
             foreach (var command in commands)
             {
@@ -28,12 +29,12 @@ namespace Tactile.Console.Commands
 
                 if (command is BaseCommandGroup commandGroup)
                 {
-                    PrintCommands(console, commandGroup.GetSubcommands(), $"{namePrefix}{command.Name} ");
+                    PrintHelpForCommands(console, commandGroup.GetSubcommands(), $"{namePrefix}{command.Name} ");
                 }
             }
         }
 
-        private static PrintBuilder PrintCommandArguments(PrintBuilder p, BaseCommand command)
+        private static BasePrintBuilder PrintCommandArguments(BasePrintBuilder p, BaseCommand command)
         {
             if (command is not BaseCommandWithParameters { HasParameters: true } parameterCommand)
                 return p;

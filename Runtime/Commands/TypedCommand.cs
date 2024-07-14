@@ -6,7 +6,7 @@ namespace Tactile.Console
 {
     public abstract class BaseCommandWithParameters<TFirst> : BaseCommandWithParameters
     {
-        public BaseCommandWithParameters(string name, string description, BaseParameter firstBaseParameter)
+        public BaseCommandWithParameters(string name, string description, BaseParameter<TFirst> firstBaseParameter)
             : base(name, description, firstBaseParameter)
         {
         }
@@ -31,8 +31,8 @@ namespace Tactile.Console
 
     public abstract class BaseCommandWithParameters<TFirst, TSecond> : BaseCommandWithParameters
     {
-        public BaseCommandWithParameters(string name, string description, BaseParameter firstBaseParameter,
-            BaseParameter secondBaseParameter)
+        public BaseCommandWithParameters(string name, string description, BaseParameter<TFirst> firstBaseParameter,
+            BaseParameter<TSecond> secondBaseParameter)
             : base(name, description, firstBaseParameter, secondBaseParameter)
         {
         }
@@ -57,8 +57,8 @@ namespace Tactile.Console
 
     public abstract class BaseCommandWithParameters<TFirst, TSecond, TThird> : BaseCommandWithParameters
     {
-        public BaseCommandWithParameters(string name, string description, BaseParameter firstBaseParameter,
-            BaseParameter secondBaseParameter, BaseParameter thirdBaseParameter)
+        public BaseCommandWithParameters(string name, string description, BaseParameter<TFirst> firstBaseParameter,
+            BaseParameter<TSecond> secondBaseParameter, BaseParameter<TThird> thirdBaseParameter)
             : base(name, description, firstBaseParameter,
                 secondBaseParameter, thirdBaseParameter)
         {
@@ -84,8 +84,8 @@ namespace Tactile.Console
 
     public abstract class BaseCommandWithParameters<TFirst, TSecond, TThird, TFourth> : BaseCommandWithParameters
     {
-        public BaseCommandWithParameters(string name, string description, BaseParameter firstBaseParameter,
-            BaseParameter secondBaseParameter, BaseParameter thirdBaseParameter, BaseParameter fourthBaseParameter)
+        public BaseCommandWithParameters(string name, string description, BaseParameter<TFirst> firstBaseParameter,
+            BaseParameter<TSecond> secondBaseParameter, BaseParameter<TThird> thirdBaseParameter, BaseParameter<TFourth> fourthBaseParameter)
             : base(name, description, firstBaseParameter, secondBaseParameter, thirdBaseParameter,
                 fourthBaseParameter)
         {
@@ -111,8 +111,8 @@ namespace Tactile.Console
     
     public abstract class BaseCommandWithParameters<TFirst, TSecond, TThird, TFourth, TFifth> : BaseCommandWithParameters
     {
-        public BaseCommandWithParameters(string name, string description, BaseParameter firstBaseParameter,
-            BaseParameter secondBaseParameter, BaseParameter thirdBaseParameter, BaseParameter fourthBaseParameter, BaseParameter fifthBaseParameter)
+        public BaseCommandWithParameters(string name, string description, BaseParameter<TFirst> firstBaseParameter,
+            BaseParameter<TSecond> secondBaseParameter, BaseParameter<TThird> thirdBaseParameter, BaseParameter<TFourth> fourthBaseParameter, BaseParameter<TFifth> fifthBaseParameter)
             : base(name, description, firstBaseParameter, secondBaseParameter, thirdBaseParameter, fourthBaseParameter)
         {
         }

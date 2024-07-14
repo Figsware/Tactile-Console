@@ -14,7 +14,7 @@ namespace Tactile.Console.Editor
             _console = new Console();
             _imguiConsole = new IMGUIConsole()
             {
-                UseEditorSelectableLabel = true
+                UseEditorGUI = true
             };
             _imguiConsole.OnRepaint += Repaint;
 
