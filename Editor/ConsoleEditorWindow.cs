@@ -1,11 +1,8 @@
-﻿using System;
-using System.Text;
-using Tactile.Console.Interfaces;
+﻿using Tactile.Console.Interfaces;
 using UnityEditor;
 using UnityEngine;
-using Console = Tactile.Console.Console;
 
-namespace Editor
+namespace Tactile.Console.Editor
 {
     public class ConsoleEditorWindow : EditorWindow
     {

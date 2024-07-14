@@ -1,7 +1,9 @@
 {
     "name": "Tactile.Console.Editor",
     "rootNamespace": "Tactile.Console",
-    "references": ["GUID:ebdd361761c905f479c01d8bcc328ee2"],
+    "references": [
+        "GUID:ebdd361761c905f479c01d8bcc328ee2"
+    ],
     "includePlatforms": [
         "Editor"
     ],
