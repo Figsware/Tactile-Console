@@ -3,9 +3,9 @@
 namespace Tactile.Console.Commands
 {
     [GlobalCommand]
-    public class ExitCommand : BaseCommandWithParameters
+    public class QuitCommand : BaseCommandWithParameters
     {
-        public ExitCommand() : base("exit", "Exits the application.")
+        public QuitCommand() : base("quit", "Quits the application.")
         {
         }
 

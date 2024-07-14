@@ -76,6 +76,22 @@ namespace Tactile.Console
         {
             _consoleCommands.Add(command.Name, command);
         }
+
+        public void RemoveConsoleCommand(string name)
+        {
+            _consoleCommands.Remove(name);
+        }
+        
+        public static void AddGlobalCommand(BaseCommandWithParameters command)
+        {
+            GlobalConsoleCommands.Add(command.Name, command);
+        }
+
+        public static void RemoveGlobalCommand(string name)
+        {
+            GlobalConsoleCommands.Remove(name);
+        }
+        
         public void Print(string message)
         {
             OnPrintLine?.Invoke(message);
