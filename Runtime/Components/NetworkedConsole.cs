@@ -10,7 +10,6 @@ using UnityEngine;
 
 namespace Tactile.Console.Components
 {
-    [ExecuteAlways]
     public class NetworkedConsole : MonoBehaviour
     {
         [SerializeField] private string bindAddress = "0.0.0.0";
@@ -52,8 +51,8 @@ namespace Tactile.Console.Components
 
         private async void RunSocket()
         {
-            // If we're in edit mode but don't allow running in editor, stop now.
-            if (Application.isEditor && !Application.isPlaying && !runInEditor)
+            // If we don't allow running in editor, stop now.
+            if (Application.isEditor && !runInEditor)
                 return;
 
             // If we're a release build but don't allow running in release builds, stop now.
