@@ -29,12 +29,17 @@ namespace Tactile.Console.Components
 
         private void OnDisable()
         {
-            foreach (var client in _clients)
+            // Disconnect clients.
+            if (_clients != null)
             {
-                client.Close();
+                foreach (var client in _clients)
+                {
+                    client.Close();
+                }
+                _clients.Clear();
             }
-            _clients.Clear();
-            _socket.Close();
+            
+            _socket?.Close();
         }
 
         private void Update()
