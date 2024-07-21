@@ -39,7 +39,7 @@ namespace Tactile.Console.Commands
             private readonly LogType _logType;
             
             public DebugLogCommand(string name, string description, LogType logType) : base(name, description,
-                new StringParameter("message", "The message to print", true))
+                new RestParameter("message", "The message to print", true))
             {
                 _logType = logType;
             }

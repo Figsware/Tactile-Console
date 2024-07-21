@@ -19,15 +19,7 @@ namespace Tactile.Console.Parameters
         
         protected override void ParseParameter(string parameter, out bool isValid, out string[] autocompleteSuggestions)
         {
-            if (_pattern != null)
-            {
-                isValid = _pattern.IsMatch(parameter);
-            }
-            else
-            {
-                isValid = true;
-            }
-            
+            isValid = _pattern == null || _pattern.IsMatch(parameter);
             autocompleteSuggestions = Array.Empty<string>();
         }
 

@@ -22,11 +22,11 @@ namespace Tactile.Console.Parameters
         {
             public readonly bool IsValid;
             public readonly string[] AutocompleteSuggestions;
-            protected readonly string _parameterValue;
+            protected readonly string Argument;
 
-            public MatchInfo(string parameterValue, bool isValid, string[] autocompleteSuggestions)
+            protected MatchInfo(string argument, bool isValid, string[] autocompleteSuggestions)
             {
-                _parameterValue = parameterValue;
+                Argument = argument;
                 IsValid = isValid;
             }
 
@@ -53,12 +53,12 @@ namespace Tactile.Console.Parameters
         {
             private readonly BaseParameter<T> _baseParameter;
             
-            internal MatchInfo(BaseParameter<T> baseParameter, string parameterValue, bool isValid, string[] autocompleteSuggestions): base(parameterValue, isValid, autocompleteSuggestions)
+            internal MatchInfo(BaseParameter<T> baseParameter, string argument, bool isValid, string[] autocompleteSuggestions): base(argument, isValid, autocompleteSuggestions)
             {
                 _baseParameter = baseParameter;
             }
 
-            public bool TryGetValue(out T value) => _baseParameter.TryGetValue(_parameterValue, out value);
+            public bool TryGetValue(out T value) => _baseParameter.TryGetValue(Argument, out value);
 
             public override bool TryGetValue(out object value)
             {

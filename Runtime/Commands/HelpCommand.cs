@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Tactile.Console.Parameters;
 using Tactile.Console.Printing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,7 +42,11 @@ namespace Tactile.Console.Commands
             
             var parameters =
                 string.Join(' ',
-                    parameterCommand.Parameters.Select(pm => pm.IsRequired ? $"<{pm.Name}>" : $"({pm.Name})"));
+                    parameterCommand.Parameters.Select(pm =>
+                    {
+                        var name = pm.Name + (pm is RestParameter ? "..." : string.Empty);
+                        return pm.IsRequired ? $"<{name}>" : $"({name})";
+                    }));
             return p + " " + parameters;
         }
     }

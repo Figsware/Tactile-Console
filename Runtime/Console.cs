@@ -151,7 +151,17 @@ namespace Tactile.Console
             
             foreach (var commandType in commandTypes)
             {
-                var command = (BaseCommand)Activator.CreateInstance(commandType);
+                BaseCommand command;
+                try
+                {
+                    command = (BaseCommand)Activator.CreateInstance(commandType);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogError($"Could not create command {commandType.Name}. Reason: {exception.Message}");
+                    continue;
+                }
+                
                 GlobalConsoleCommands.Add(command.Name, command);
             }
             
